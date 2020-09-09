@@ -1,84 +1,69 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-
-
-
-// making charactors
-var Pnumber = [1,2,3,4,5,6,7,8,9,0].splice;
-var lowerCaseL = ["a","b","c","d","e","f","g","h","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"].splice;
-var UppercaseL = ["A","B","C","D","E","F","G","H","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"].splice;
-var abc = ("Now you know your abc's");
-var SPcharacters =["!","@","#","$","%","^","&","*","(",")","-","_","+","="];
-
-
-
-
-function passwordOP(){
-
-  // pop up un the screen with set values   
-  console.log('hello world')
-  var size = Number(
-    prompt(
-      'pick a paassword lenght between 8-20 characters'
-      )
-  );
-  var Pnumber = confirm("would you like to use numeral?");
-  var lowerCaseL = confirm("would you like to use Lower case characters?");
-  var UppercaseL = confirm("would you like to use Upper case characters?");
-  var SPcharacters = confirm("would you like to use symbols characters?");
-
- if (lowerCaseL == false && 
-  Pnumber == false && 
-  UppercaseL  == false && 
-  lowerCaseL == false &&  SPcharacters == false){
-  alert('Must chose at least');
-  return
-}
-
-  console.log("user pick x size ", size);
+// password options
+var number ="1234567890";
+var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+var SPcharacter = "!@#$%^&*_-~";
 
 
 
 
 
-  // Defualt 
-  if (size < 8 || size > 20){
-    alert('This lenght would not work please try again')
-    return;
-  
-  }
-
-
-  if(Pnumber){
-    console.log(pickedCharacters =+ Pnumber);
-  }
-
-  if(lowerCaseL){
-    console.log(pickedCharacters += lowerCaseL);
-  }
-  
-  if(UppercaseL){
-    console.log(pickedCharacters += UppercaseL);
-  }
-
-  if(SPcharacters){
-    console.log(pickedCharacters += SPcharacters);
-  }
-
-  console.log(pickedCharacters);
-
-
-
-
-}
 
 function generatePassword(){
-  var userOption = passwordOP()
+ var passwordOpt = "";
+  length = prompt("Please chose a password lenght between 8-20")
+  if(isNaN(length) || length < 8 || length > 20) {
+    alert("The value you have chosen  1. Not a number 2. Number don't meet requirements")
+    return;
+  }
+  console.log("user pick " + length)
 
-} 
 
-passwordOP();
+  var numberBool = confirm("would you like use numbers?")
+  var upperCaseBool = confirm("would you like use uppercase letters?")
+  var lowerCaseBool = confirm("would you like use lowercase letters")
+  var SPcharacterBool = confirm("would you like use special characters? ex:..'#,$,!'")
 
+  if(numberBool == false &&
+    upperCaseBool == false &&
+    lowerCaseBool == false &&
+    SPcharacterBool == false
+    ){
+      alert('At lest pick one :P')
+      return;
+    }
+    if(numberBool){
+      passwordOpt += number;
+    }
+    if(upperCaseBool){
+      passwordOpt += upperCase;
+    }
+    if(lowerCaseBool){
+      passwordOpt += lowerCase;
+    }
+    if(SPcharacterBool){
+      passwordOpt += SPcharacter;
+    }
+
+console.log(passwordOpt)
+  
+// making random number outcome
+    var outcome = "";
+    for(var i = 0; i < length; i++){
+      
+        var rannumber = passwordOpt[Math.floor(Math.random()* passwordOpt.length)];
+        outcome = outcome +rannumber;
+        console.log(outcome)
+      
+
+       
+    }
+    return outcome;
+
+}
+ 
 
 
 // Write password to the #password input
@@ -88,10 +73,8 @@ function writePassword() {
 
   passwordText.value = password;
 
-}
 
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// return;
